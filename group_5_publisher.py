@@ -5,8 +5,8 @@ import time
 import threading
 import random
 from datetime import datetime
-from data_generator import DataGenerator
-from mqtt_utils import MQTTUtils
+from group_5_data_generator import DataGenerator
+from group_5_mqtt_utils import MQTTUtils
 
 class PublisherGUI:
     def __init__(self, root):

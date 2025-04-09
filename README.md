@@ -37,12 +37,12 @@ This project implements an end-to-end IoT solution using MQTT protocol for data 
 
 2. Run the publisher:
    ```bash
-   python publisher.py
+   python group_5_publisher.py
    ```
 
 3. Run the subscriber:
    ```bash
-   python subscriber.py
+   python group_5_subscriber.py
    ```
 
 4. Configure the publisher:

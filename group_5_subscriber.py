@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.dates as mdates
 from collections import deque
-from mqtt_utils import MQTTUtils
+from group_5_mqtt_utils import MQTTUtils
 from matplotlib.ticker import MaxNLocator
 
 class SubscriberGUI:
