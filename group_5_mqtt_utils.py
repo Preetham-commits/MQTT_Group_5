@@ -2,6 +2,8 @@ import json
 import time
 import random
 from datetime import datetime
+import group_5_config as config
+
 
 class MQTTUtils:
     @staticmethod
@@ -24,7 +26,7 @@ class MQTTUtils:
             return None
 
     @staticmethod
-    def should_drop_packet(drop_chance=0.01):
+    def should_drop_packet(drop_chance=config.DROP_PACKET_CHANCE/100):
         return random.random() < drop_chance
 
     @staticmethod

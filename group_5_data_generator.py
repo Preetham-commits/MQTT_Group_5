@@ -1,5 +1,7 @@
 import random
 import math
+import group_5_config as config
+
 
 class DataGenerator:
     def __init__(self, base_value=50, variance=10, trend=0, pattern_type="normal"):

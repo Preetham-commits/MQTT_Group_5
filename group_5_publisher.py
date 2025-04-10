@@ -7,6 +7,7 @@ import random
 from datetime import datetime
 from group_5_data_generator import DataGenerator
 from group_5_mqtt_utils import MQTTUtils
+import group_5_config as config
 
 class PublisherGUI:
     def __init__(self, root):
@@ -26,15 +27,15 @@ class PublisherGUI:
         connection_frame.grid(row=0, column=0, padx=5, pady=5, sticky="ew")
         ttk.Label(connection_frame, text="Broker:").grid(row=0, column=0)
         self.broker_entry = ttk.Entry(connection_frame)
-        self.broker_entry.insert(0, "localhost")
+        self.broker_entry.insert(0, config.MQTT_BROKER_URL)
         self.broker_entry.grid(row=0, column=1)
         ttk.Label(connection_frame, text="Port:").grid(row=0, column=2)
         self.port_entry = ttk.Entry(connection_frame, width=5)
-        self.port_entry.insert(0, "1883")
+        self.port_entry.insert(0, config.MQTT_BROKER_PORT)
         self.port_entry.grid(row=0, column=3)
         ttk.Label(connection_frame, text="Topic:").grid(row=0, column=4)
         self.topic_entry = ttk.Entry(connection_frame)
-        self.topic_entry.insert(0, "iot/data")
+        self.topic_entry.insert(0, config.MQTT_TOPIC)
         self.topic_entry.grid(row=0, column=5)
         self.connect_button = ttk.Button(connection_frame, text="Connect", command=self.connect_mqtt)
         self.connect_button.grid(row=0, column=6, padx=5)
@@ -132,7 +133,7 @@ class PublisherGUI:
                 if MQTTUtils.should_drop_packet():
                     self.log_status(f"{log_prefix}Simulating packet drop (ID: {packet_id})")
                     packet_id += 1
-                    time.sleep(1)
+                    time.sleep(config.PUBLISHING_TIME)
                     continue
                 payload = MQTTUtils.package_data(value, packet_id)
                 if self.client.is_connected():
@@ -148,7 +149,7 @@ class PublisherGUI:
                     self.log_status("Client disconnected. Stopping publish loop.")
                     self.publishing = False
                 packet_id += 1
-                time.sleep(1)
+                time.sleep(config.PUBLISHING_TIME)
             except Exception as e:
                 self.log_status(f"Publishing loop error: {e}")
                 if not self.client.is_connected():

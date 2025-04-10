@@ -8,12 +8,14 @@ import matplotlib.dates as mdates
 from collections import deque
 from group_5_mqtt_utils import MQTTUtils
 from matplotlib.ticker import MaxNLocator
+import group_5_config as config
+
 
 class SubscriberGUI:
-    OUT_OF_RANGE_THRESHOLD_FACTOR = 5
-    MAX_DATA_POINTS = 500
-    EXPECTED_BASE = 50
-    EXPECTED_VARIANCE = 20
+    MAX_DATA_POINTS = config.MAX_DATA_POINTS
+    EXPECTED_BASE = config.EXPECTED_BASE
+    EXPECTED_VARIANCE = config.EXPECTED_VARIANCE
+    OUT_OF_RANGE_THRESHOLD_FACTOR = config.OUT_OF_RANGE_THRESHOLD_FACTOR
 
     def __init__(self, root):
         self.root = root
@@ -37,15 +39,15 @@ class SubscriberGUI:
         connection_frame.grid(row=0, column=0, columnspan=2, padx=5, pady=5, sticky="ew")
         ttk.Label(connection_frame, text="Broker:").grid(row=0, column=0, padx=2, pady=2, sticky="w")
         self.broker_entry = ttk.Entry(connection_frame, width=20)
-        self.broker_entry.insert(0, "localhost")
+        self.broker_entry.insert(0, config.MQTT_BROKER_URL)
         self.broker_entry.grid(row=0, column=1, padx=2, pady=2)
         ttk.Label(connection_frame, text="Port:").grid(row=0, column=2, padx=2, pady=2, sticky="w")
         self.port_entry = ttk.Entry(connection_frame, width=6)
-        self.port_entry.insert(0, "1883")
+        self.port_entry.insert(0, config.MQTT_BROKER_PORT)
         self.port_entry.grid(row=0, column=3, padx=2, pady=2)
         ttk.Label(connection_frame, text="Topic:").grid(row=0, column=4, padx=2, pady=2, sticky="w")
         self.topic_entry = ttk.Entry(connection_frame, width=20)
-        self.topic_entry.insert(0, "iot/data")
+        self.topic_entry.insert(0, config.MQTT_TOPIC)
         self.topic_entry.grid(row=0, column=5, padx=2, pady=2)
         self.connect_button = ttk.Button(connection_frame, text="Connect", command=self.connect_mqtt)
         self.connect_button.grid(row=0, column=6, padx=5, pady=2)
